@@ -9,7 +9,7 @@ import axios from 'axios';
 import { FaGithub } from 'react-icons/fa';
 
 function Home({ s }: any) {
-  const [currSong, setCurrSong] = useState<any>(s?.name || '');
+  const [currSong, setCurrSong] = useState<any>(s || '');
   const [christmasSongsButton, setChristmasSongsButton] = useState(true);
   const [winterSongsButton, setWinterSongsButton] = useState(true);
 
@@ -31,9 +31,9 @@ function Home({ s }: any) {
   const updateSong = async (song: any) => {
     const res = await axios
       .get(`https://Music-API.jasonwang105.repl.co/update`, {
-        params: { name: song.name, url: song.url },
+        params: { name: song.name, url: song.url, image: song.image },
       })
-      .catch((err) => console.log(err));
+      .catch((err: any) => console.log(err));
     return 'Success';
   };
 
@@ -46,16 +46,16 @@ function Home({ s }: any) {
             alt='ACTI'
             className='h-40'
           />
-          <div className='text-white text-7xl font-bold flex items-center'>
+          <div className='text-white text-3xl font-bold flex items-center'>
             Music Selector
           </div>
         </div>
         <div>
           <a
-            href=''
-            className='text-white font-bold flex items-center text-6xl'
+            href='https://github.com/XoutDragon/ACTI-Music-Selector-Frontend'
+            className='text-white font-bold flex items-center text-3xl'
           >
-            <FaGithub className='mr-5' />
+            <FaGithub className='mr-2' />
             Github
           </a>
         </div>
@@ -91,14 +91,18 @@ function Home({ s }: any) {
               </button>
             </div>
           </div>
-          <div className='grid grid-flow-row overflow-y-scroll w-1/2 mx-auto scrollbar-thin scrollbar-thumb-blue-600 dark:scrollbar-track-gray-900 h-80'>
+          <div className='grid grid-flow-row overflow-y-scroll w-1/2 mx-auto scrollbar-thin scrollbar-thumb-rounded-md scrollbar-thumb-blue-700 dark:scrollbar-track-blue-700 h-80'>
             {songs.map((song: any, i: any) => (
               <button
                 key={i}
                 className={`hover:cursor-pointer bg-white rounded-3xl w-2/3 mx-auto my-2 min-h-30`}
                 onClick={(e) => {
-                  setCurrSong(song);
-                  updateSong(song);
+                  if (!currSong.name) {
+                    setCurrSong(song);
+                    updateSong(song);
+                  } else {
+                    alert("Song is currently playing!")
+                  }
                 }}
               >
                 <div className='text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-600 text-lg font-medium'>
@@ -131,7 +135,7 @@ export default Home;
 export const getServerSideProps = async () => {
   const s = await axios
     .get('https://music-api.jasonwang105.repl.co/song')
-    .then((res) => res.data);
+    .then((res: any) => res.data);
 
   return {
     props: {
