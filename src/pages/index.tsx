@@ -133,13 +133,13 @@ function Home({ s }: any) {
 export default Home;
 
 export async function getStaticProps() {
-  const song = await axios
+  const s = await axios
     .get('https://music-api.jasonwang105.repl.co/song')
     .then((res: any) => res.data);
 
   return {
     props: {
-      song,
+      s,
     },
     revalidate: 1,
   };
