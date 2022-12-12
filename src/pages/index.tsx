@@ -132,14 +132,15 @@ function Home({ s }: any) {
 
 export default Home;
 
-export const getServerSideProps = async () => {
-  const s = await axios
+export async function getStaticProps() {
+  const song = await axios
     .get('https://music-api.jasonwang105.repl.co/song')
     .then((res: any) => res.data);
 
   return {
     props: {
-      s,
+      song,
     },
+    revalidate: 1,
   };
-};
+}
