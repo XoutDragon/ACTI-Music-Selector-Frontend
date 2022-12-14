@@ -117,7 +117,7 @@ function Home({ s }: any) {
           Currently Playing...
           <div className='my-3'>
             <img
-              src={`${currSong.image ? currSong.image : './images/kosman.jpg'}`}
+              src={`${currSong.image ? currSong.image : 'https://kieruken-website.vercel.app/images/1651190199409.jpeg'}`}
               className='border w-1/2 border-blue-700 rounded-3xl'
               alt='song image'
             />
