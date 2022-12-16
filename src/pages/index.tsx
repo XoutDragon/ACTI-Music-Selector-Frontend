@@ -7,6 +7,7 @@ import Snowflakes from '../components/snowflakes';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaGithub } from 'react-icons/fa';
+import Image from 'next/image';
 
 function Home({ s }: any) {
   const [currSong, setCurrSong] = useState<any>(s || '');
@@ -117,9 +118,11 @@ function Home({ s }: any) {
           Currently Playing...
           <div className='my-3'>
             <img
-              src={`${currSong.image ? currSong.image : 'https://kieruken-website.vercel.app/images/1651190199409.jpeg'}`}
+              src={`${currSong.image ? currSong.image : '/images/kosman.jpg'}`}
               className='border w-1/2 border-blue-700 rounded-3xl'
               alt='song image'
+              width={300}
+              height={300}
             />
           </div>
           <div>{currSong.name ? currSong.name : 'Nothing'}</div>
