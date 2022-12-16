@@ -96,7 +96,7 @@ function Home({ s }: any) {
             {songs.map((song: any, i: any) => (
               <button
                 key={i}
-                className={`hover:cursor-pointer bg-white rounded-3xl w-2/3 mx-auto my-2 min-h-30`}
+                className={`hover:cursor-pointer bg-white rounded-3xl w-2/3 mx-auto my-2 min-h-20`}
                 onClick={(e) => {
                   if (!currSong.name) {
                     setCurrSong(song);
